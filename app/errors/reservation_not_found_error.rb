@@ -1,0 +1,1 @@
+class ReservationNotFoundError < StandardError; end

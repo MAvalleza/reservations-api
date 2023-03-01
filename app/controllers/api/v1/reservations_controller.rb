@@ -27,6 +27,15 @@ module Api
       end
 
       def update
+        # Format payload
+        payload = formatted_payload
+
+        # Call the service
+        response = UpdateReservation.run(code: params[:id], params: payload)
+
+        render Reservations::ResponseFormatter.new(response).to_h
+      rescue InvalidPayloadFormatError
+        render json: { error: { message: 'Invalid payload format' } }, status: :unprocessable_entity
       end
 
       private
