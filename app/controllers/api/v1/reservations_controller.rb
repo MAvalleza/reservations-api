@@ -6,11 +6,11 @@ module Api
         payload = formatted_payload
   
         # Call the service
-      response = CreateReservation.run(payload)
+        response = CreateReservation.run(payload)
 
         render Reservations::ResponseFormatter.new(response).to_h
       rescue InvalidPayloadFormatError
-        render json: { error: { message: 'Invalid payload format' } }, status: 400
+        render json: { error: { message: 'Invalid payload format' } }, status: :unprocessable_entity
         # Return response
       end
 
@@ -18,6 +18,12 @@ module Api
         @reservations = Reservation.all
 
         render json: @reservations
+      end
+
+      def show
+        @reservation = Reservation.find_by(code: params[:id]) || {}
+  
+        render json: @reservation
       end
 
       def update
