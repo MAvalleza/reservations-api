@@ -2,8 +2,11 @@ module Api
   module V1
     class ReservationsController < ApplicationController
       def create
-        # Call service
-        response = payload
+        # Format payload
+        payload = formatted_payload
+  
+        # Call the service
+        response = CreateReservation.run(params: payload)
 
         render json: response
       rescue InvalidPayloadFormatError
@@ -22,7 +25,7 @@ module Api
 
       private
 
-      def payload
+      def formatted_payload
         Reservations::PayloadFormatter.new(params).to_h
       end
     end
