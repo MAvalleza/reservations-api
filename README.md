@@ -15,15 +15,23 @@ Simple API for processing two types of reservation payload and saving them in on
 
 It is **recommended** to use Docker to start the application to avoid any potential problems in dependencies.
 
-First, clone the repository.
+1. Clone the repository.
 
-To start the Docker application, simply execute the following command while in the project's root folder:
+2. To start the Docker application, simply execute the following command while in the project's root folder:
 
 ```bash
 docker compose up --build -d
 ```
 
 The application will be visible in the Docker dashboard or by running `docker ps` 
+
+3. Access the container
+
+```bash
+docker exec -it reservations-api-web-1 /bin/bash
+```
+
+4. Set up the database by running `rake db:migrate`
 
 ### Accessing the API
 
