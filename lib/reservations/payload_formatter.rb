@@ -52,7 +52,7 @@ module Reservations
         guest_email: reservation_details[:guest_email],
         guest_first_name: reservation_details[:guest_first_name],
         guest_last_name: reservation_details[:guest_last_name],
-        guest_phone: reservation_details[:guest_phone_numbers],
+        guest_phone: reservation_details[:guest_phone_numbers].try(:first),
         currency: reservation_details[:host_currency],
         payout_price: reservation_details[:expected_payout_amount],
         security_price: reservation_details[:listing_security_price_accurate],

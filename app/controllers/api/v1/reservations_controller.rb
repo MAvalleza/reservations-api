@@ -6,9 +6,9 @@ module Api
         payload = formatted_payload
   
         # Call the service
-        response = CreateReservation.run(params: payload)
+      response = CreateReservation.run(payload)
 
-        render json: response
+        render Reservations::ResponseFormatter.new(response).to_h
       rescue InvalidPayloadFormatError
         render json: { error: { message: 'Invalid payload format' } }, status: 400
         # Return response
