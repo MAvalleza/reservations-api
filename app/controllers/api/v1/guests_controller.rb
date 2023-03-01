@@ -1,5 +1,6 @@
 module Api
   module V1
+    # Controller for Guest endpoints
     class GuestsController < ApplicationController
       def index
         @guests = Guest.all

@@ -1,5 +1,6 @@
 module Api
   module V1
+    # Controller for Reservation endpoints
     class ReservationsController < ApplicationController
       def create
         # Format payload

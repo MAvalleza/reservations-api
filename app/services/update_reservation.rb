@@ -1,3 +1,4 @@
+# Updates the reservation details
 class UpdateReservation < ApplicationService
   attr_reader :params, :code
 

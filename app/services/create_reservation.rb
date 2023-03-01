@@ -1,3 +1,4 @@
+# Creates a Reservation active record along with a Guest active record
 class CreateReservation < ApplicationService
   attr_reader :params
 
