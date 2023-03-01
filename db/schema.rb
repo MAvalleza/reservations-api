@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_28_185517) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_01_150256) do
   create_table "guests", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
@@ -30,13 +30,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_185517) do
     t.integer "children"
     t.integer "infants"
     t.string "status"
-    t.string "guest_email"
     t.string "currency"
     t.integer "payout_price"
     t.integer "security_price"
     t.integer "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "guest_id"
+    t.index ["guest_id"], name: "index_reservations_on_guest_id"
   end
 
+  add_foreign_key "reservations", "guests"
 end
