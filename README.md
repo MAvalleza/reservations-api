@@ -31,7 +31,9 @@ The API will be served at `http://localhost:3000`
 
 ## Running tests
 
-Rspec is used as the test suite for the project
+Rspec is used as the test suite for the project.
+
+Tests were only written for the main features mentioned in the exercise requirements.
 
 Run tests by using this command:
 
