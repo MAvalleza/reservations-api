@@ -41,15 +41,13 @@ Run tests by using this command:
 bundle exec rspec
 ```
 
-## Running Endpoints
-
-### Payloads
+## Payloads
 
 Currently there are 2 types of request payloads that can be processed
 
 Note that both are assigned to a `data` attribute in the request payload for `ActionController::StrongParameters` usage purposes.
 
-#### Payload #1
+### Payload #1
 
 ```json
 {
@@ -77,7 +75,7 @@ Note that both are assigned to a `data` attribute in the request payload for `Ac
 }
 ```
 
-#### Payload #2
+### Payload #2
 
 ```json
 {
@@ -111,6 +109,12 @@ Note that both are assigned to a `data` attribute in the request payload for `Ac
 }
 
 ```
+
+## Validations
+
+The endpoint only validates if the parameters have values.
+
+## Running Endpoints
 
 ### Endpoints
 
