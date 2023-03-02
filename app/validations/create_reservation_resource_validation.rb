@@ -29,7 +29,7 @@ class CreateReservationResourceValidation
 
   def invalid_error
     Reservations::ErrorFormatter.new(
-      errors: "Reservation code and guest email are required. params #{@code}",
+      errors: "Reservation code and guest email are required",
       http_code: 400
     ).to_h
   end
