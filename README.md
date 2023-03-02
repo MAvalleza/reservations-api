@@ -112,7 +112,9 @@ Note that both are assigned to a `data` attribute in the request payload for `Ac
 
 ## Validations
 
-The endpoint only validates if the parameters have values.
+Reservation code and guest emails should be unique.
+
+For other parameters, the endpoint only validates if they have values.
 
 ## Running Endpoints
 
