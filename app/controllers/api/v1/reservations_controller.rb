@@ -12,7 +12,6 @@ module Api
         render Reservations::ResponseFormatter.new(response).to_h
       rescue InvalidPayloadFormatError
         render json: { error: { message: 'Invalid payload format' } }, status: :unprocessable_entity
-        # Return response
       end
 
       def index
