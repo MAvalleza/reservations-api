@@ -24,6 +24,30 @@ describe Api::V1::ReservationsController, :type => :controller do
     )
   end
 
+  describe 'GET index' do
+    subject { get :index }
+
+    it 'fetches reservations' do
+      expect(Reservation).to receive(:all).with(no_args)
+
+      subject
+    end
+
+    specify { expect(response).to have_http_status(200) }
+  end
+
+  describe 'GET show' do
+    subject { get :show, params: { id: reservation[:code] } }
+
+    it 'fetches reservation' do
+      expect(Reservation).to receive(:find_by).with(code: reservation[:code])
+
+      subject
+    end
+
+    specify { expect(response).to have_http_status(200) }
+  end
+
   describe 'POST create' do
     subject do
       post :create, params: params
@@ -54,15 +78,38 @@ describe Api::V1::ReservationsController, :type => :controller do
     end
   end
 
-  describe 'GET index' do
-    subject { get :index }
+  describe 'PUT update' do
+    subject do
+      put :update, params: { id: reservation[:code] }
+    end
 
-    it 'fetches reservations' do
-      expect(Reservation).to receive(:all).with(no_args)
+    before do
+      allow(UpdateReservation).to receive(:run).and_return(service_response)
+    end
+
+    it 'runs the update service' do
+      expect(Reservations::PayloadFormatter).to receive(:new).with(instance_of(ActionController::Parameters))
+
+      expect(UpdateReservation).to receive(:run).with(
+        code: reservation[:code],
+        params: formatted_payload
+      )
+
+      expect(Reservations::ResponseFormatter).to receive(:new).with(service_response)
 
       subject
     end
 
-    specify { expect(response).to have_http_status(200) }
+    context 'when payload is invalid' do
+      before do
+        allow(payload_instance).to receive(:to_h).and_raise(InvalidPayloadFormatError)
+      end
+
+      it 'does not run the service' do
+        expect(UpdateReservation).to_not receive(:run)
+
+        subject
+      end
+    end
   end
 end
